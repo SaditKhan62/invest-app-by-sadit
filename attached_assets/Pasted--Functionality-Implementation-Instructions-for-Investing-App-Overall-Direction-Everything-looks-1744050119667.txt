@@ -1,0 +1,64 @@
+🛠️ Functionality Implementation Instructions for Investing App
+✅ Overall Direction
+Everything looks great design-wise so far — now it’s time to shift focus to making the app fully functional, smooth, and responsive like popular platforms such as Robinhood and Webull.
+
+📈 Stock Purchase → Portfolio Integration
+Ensure that whenever a user buys a stock, it is immediately reflected in their Portfolio.
+
+Display the correct stock name, quantity purchased, and transaction amount.
+
+Behavior should mimic real-time portfolio updates, as seen in Robinhood/Webull.
+
+💰 Deposit Funds Flow
+When the user clicks “Deposit Funds”, they should be taken to a dedicated deposit screen or external page.
+
+This screen should:
+
+Prompt the user to enter bank details.
+
+OR allow them to connect to their bank account securely.
+
+This flow should simulate a real-world fund deposit experience.
+
+🎮 Earnings Page (Gamification)
+On the Earnings page, do the following:
+
+Add two new, fun and engaging games to increase user interaction.
+
+If needed, replace the current games with more exciting alternatives.
+
+Update the starting balance on this page to ₱0.00 instead of a preset value like ₱1000.00 or similar.
+
+Ensure it feels like real rewards or progress, even if it’s a simulation.
+
+🧩 Final Functional Fixes (High Priority)
+Stock Detail View
+When visiting any stock page:
+
+There should be only one "Trade" button – remove duplicate elements.
+
+The Candlestick chart view must show actual candle chart lines when selected.
+
+Every stock (e.g., S&P 500/SPY) should load full details properly, just like how Apple (AAPL) currently works.
+
+Fixing Stock Errors
+Example Issue: When clicking on SPY, the message shows:
+
+“Error Loading Stock: Unable to load stock details for SPY. Please try again later.”
+
+This issue should be fixed so all stocks load their data and charts correctly.
+
+Ensure the app fetches and displays stock summary, chart, metrics, etc., reliably.
+
+🚀 Final Notes
+The top priority is full functionality:
+
+Real-time updates when buying stocks.
+
+Working deposit flow.
+
+Full stock data access for all stocks.
+
+Cleaner UI with working chart modes (line + candle).
+
+Enhanced engagement through games in the "Earn" section.
