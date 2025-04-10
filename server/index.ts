@@ -6,6 +6,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Request logging middleware
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
@@ -24,11 +25,9 @@ app.use((req, res, next) => {
       if (capturedJsonResponse) {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }
-
       if (logLine.length > 80) {
         logLine = logLine.slice(0, 79) + "…";
       }
-
       log(logLine);
     }
   });
@@ -38,32 +37,38 @@ app.use((req, res, next) => {
 
 (async () => {
   try {
+    // Register routes and initialize your server instance
     const server = await registerRoutes(app);
 
+    // Error-handling middleware.
     app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
       const status = err.status || err.statusCode || 500;
       const message = err.message || "Internal Server Error";
       res.status(status).json({ message });
-      console.error("Unhandled Error:", err); // 🔧 log the error
+      // Log the error for debugging purposes
+      console.error("Error middleware caught:", err);
     });
 
-    // Only setup Vite dev server in development
+    // Setup Vite for development; use static serving for production.
     if (app.get("env") === "development") {
       await setupVite(app, server);
     } else {
       serveStatic(app);
     }
 
-    // ✅ FIX: Use Render's dynamic port environment
+    // Use Render's provided port or default to 5000
     const port = parseInt(process.env.PORT || "5000", 10);
-    server.listen({
-      port,
-      host: "0.0.0.0",
-    }, () => {
-      log(`🚀 Server is running on port ${port}`);
-    });
+    server.listen(
+      {
+        port,
+        host: "0.0.0.0",
+      },
+      () => {
+        log(`🚀 Serving on port ${port}`);
+      }
+    );
   } catch (err) {
-    console.error("Startup Error:", err); // 🛠️ catch fatal async errors
+    console.error("Server failed to start:", err);
     process.exit(1);
   }
 })();
